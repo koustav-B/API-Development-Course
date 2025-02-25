@@ -1,15 +1,14 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.get("/")
-def get_user():
-    return {"message": "Hello Koustav"}
-
-@app.get("/home")
-def get_home():
-    return {"mes": "Hello Koustav"}
+class Post(BaseModel):
+    title: str
+    content: str
+    published: bool = True  # Default value is True
 
 @app.post("/createpost")
-def create_posts():
-    return {"message": "Post created successfully"}
+def create_posts(new_post: Post):
+    print("✅ Published Status:", new_post.published)  # Prints `True` or `False`
+    return {"data": new_post.dict()}  # Convert to dictionary before returning
