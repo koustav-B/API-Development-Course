@@ -6,3 +6,5 @@ select* from products where name like 'mo%';
 select* from products;
 select* from products order by price;
 select* from products order by price desc;
+select* from products limit 5;
+select* from products where price>10 limit 2;
