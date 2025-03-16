@@ -57,3 +57,4 @@ def delete_post(post_id: int):
             posts.pop(index)
             return {"message": "Post deleted successfully"}
     raise HTTPException(status_code=404, detail="Post not found")
+
