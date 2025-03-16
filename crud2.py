@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
-
+import psycopg2
+from psycopg2.extras import RealDictCursor
 # Initialize the FastAPI app
 app = FastAPI()
 
@@ -12,6 +13,13 @@ class Post(BaseModel):
     content: str
     published: bool = True  # Default value
     rating: Optional[int] = 4  # Default rating is 4
+
+try:
+    conn=psycopg2.connect(host='localhost',database='fastapi',user='Servers',password='csedsatm',cursor_factory=RealDictCursor)
+    cursor=conn.cursor()
+    print("Creation done")
+except Exception as error:
+    print("Error",error)
 
 # Temporary database (list to store posts)
 posts = [
